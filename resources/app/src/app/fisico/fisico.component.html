@@ -1,0 +1,284 @@
+<h2>Exploracion Fisica</h2>
+
+<div class="col-lg">
+    <div *ngIf="errors">
+        <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+    </div>
+</div>
+
+<div class='col-lg scroll scrollbar-primary' *ngIf="show">
+    <br> 
+    <form  #newForm="ngForm" (submit)="onCreate(pat,newForm)">
+        
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label for="taDerecho" class="required">T.A. (derecho)</label>                    
+                <input class="form-control" type="text" name="taDerecho" [ngModel]="fisico.taDerecho"
+                required
+                #taDerecho="ngModel">
+                <div *ngIf="(taDerecho.touched || taDerecho.dirty) && taDerecho.errors">
+                    <div *ngIf="taDerecho?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="taIzquierdo" class="required">T.A. (izquierdo)</label>                    
+                <input class="form-control" type="text" name="taIzquierdo" [ngModel]="fisico.taIzquierdo"
+                required
+                #taIzquierdo="ngModel">
+                <div *ngIf="(taIzquierdo.touched || taIzquierdo.dirty) && taIzquierdo.errors">
+                    <div *ngIf="taIzquierdo?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="freqC" class="required">F.C.</label>                    
+                <input class="form-control" type="text" name="freqC" [ngModel]="fisico.freqC"
+                required
+                #freqC="ngModel">
+                <div *ngIf="(freqC.touched || freqC.dirty) && freqC.errors">
+                    <div *ngIf="freqC?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="freqR" class="required">Frec. Resp.</label>                    
+                <input class="form-control" type="text" name="freqR" [ngModel]="fisico.freqR"
+                required
+                #freqR="ngModel">
+                <div *ngIf="(freqR.touched || freqR.dirty) && freqR.errors">
+                    <div *ngIf="freqR?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label for="temp" class="required">Temp.</label>                    
+                <input class="form-control" type="text" name="temp" [ngModel]="fisico.temp"
+                required
+                #temp="ngModel">
+                <div *ngIf="(temp.touched || temp.dirty) && temp.errors">
+                    <div *ngIf="temp?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="peso" class="required">Peso</label>                    
+                <input class="form-control" type="text" name="peso" [ngModel]="fisico.peso"
+                required
+                #peso="ngModel">
+                <div *ngIf="(peso.touched || peso.dirty) && peso.errors">
+                    <div *ngIf="peso?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="talla" class="required">Talla</label>                    
+                <input class="form-control" type="text" name="talla" [ngModel]="fisico.talla"
+                required
+                #talla="ngModel">
+                <div *ngIf="(talla.touched || talla.dirty) && talla.errors">
+                    <div *ngIf="talla?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="imc" class="required">IMC</label>                    
+                <input class="form-control" type="text" name="imc" [ngModel]="fisico.imc"
+                required
+                pattern="^[0-9]+$"
+                #imc="ngModel">
+                <div *ngIf="(imc.touched || imc.dirty) && imc.errors">
+                    <div *ngIf="imc?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    <div *ngIf="imc?.errors?.pattern" class="alert alert-danger">
+                        solo numeros
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-lg">
+                <label for="cabeza" class="required">Cabeza Y Cuello</label>
+                
+                <textarea class="form-control"  name="cabeza" cols="3" rows="3" [ngModel]="fisico.cabeza"
+                required
+                #cabeza="ngModel"></textarea>
+                <div *ngIf="(cabeza.touched || cabeza.dirty) && cabeza.errors">
+                    <div *ngIf="cabeza?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+        
+            </div>
+
+        </div>
+        <br>
+        <button *ngIf="!newForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Añadir</button>
+        <button *ngIf="newForm.valid" class="btn btn-primary btn-sm btn-space">Añadir</button>
+        <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>
+        
+    </form>
+    <br><br>
+    
+</div>
+
+<div *ngIf="!show">
+    <br>
+    <div class='col-lg scroll scrollbar-primary' *ngFor="let list of pat.fisico">
+
+        <form  #upForm="ngForm" (submit)="onUpdate(upForm)">
+            
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label for="taDerecho" class="required">T.A. (derecho)</label>                    
+                    <input class="form-control" type="text" name="taDerecho" [ngModel]="list['_doc'].taDerecho"
+                    required
+                    #taDerecho="ngModel">
+                    <div *ngIf="(taDerecho.touched || taDerecho.dirty) && taDerecho.errors">
+                        <div *ngIf="taDerecho?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>              
+                <div class="form-group col-sm-3">
+                    <label for="taIzquierdo" class="required">T.A. (izquierdo)</label>                    
+                    <input class="form-control" type="text" name="taIzquierdo" [ngModel]="list['_doc'].taIzquierdo"
+                    required
+                    #taIzquierdo="ngModel">
+                    <div *ngIf="(taIzquierdo.touched || taIzquierdo.dirty) && taIzquierdo.errors">
+                        <div *ngIf="taIzquierdo?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="freqC" class="required">F.C.</label>                    
+                    <input class="form-control" type="text" name="freqC" [ngModel]="list['_doc'].freqC"
+                    required
+                    #freqC="ngModel">
+                    <div *ngIf="(freqC.touched || freqC.dirty) && freqC.errors">
+                        <div *ngIf="freqC?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="freqR" class="required">Frec. Resp.</label>                    
+                    <input class="form-control" type="text" name="freqR" [ngModel]="list['_doc'].freqR"
+                    required
+                    #freqR="ngModel">
+                    <div *ngIf="(freqR.touched || freqR.dirty) && freqR.errors">
+                        <div *ngIf="freqR?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label for="temp" class="required">Temp.</label>                    
+                    <input class="form-control" type="text" name="temp" [ngModel]="list['_doc'].temp"
+                    required
+                    #temp="ngModel">
+                    <div *ngIf="(temp.touched || temp.dirty) && temp.errors">
+                        <div *ngIf="temp?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="peso" class="required">Peso</label>                    
+                    <input class="form-control" type="text" name="peso" [ngModel]="list['_doc'].peso"
+                    required
+                    #peso="ngModel">
+                    <div *ngIf="(peso.touched || peso.dirty) && peso.errors">
+                        <div *ngIf="peso?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="talla" class="required">Talla</label>                    
+                    <input class="form-control" type="text" name="talla" [ngModel]="list['_doc'].talla"
+                    required
+                    #talla="ngModel">
+                    <div *ngIf="(talla.touched || talla.dirty) && talla.errors">
+                        <div *ngIf="talla?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="imc" class="required">IMC</label>                    
+                    <input class="form-control" type="text" name="imc" [ngModel]="list['_doc'].imc"
+                    required
+                    pattern="^[0-9]+$"
+                    #imc="ngModel">
+                    <div *ngIf="(imc.touched || imc.dirty) && imc.errors">
+                        <div *ngIf="imc?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        <div *ngIf="imc?.errors?.pattern" class="alert alert-danger">
+                            solo numeros
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg">
+                    <label for="cabeza" class="required">Cabeza Y Cuello</label>
+                    
+                    <textarea class="form-control"  name="cabeza" cols="3" rows="3" [ngModel]="list['_doc'].cabeza"
+                    required
+                    #cabeza="ngModel"></textarea>
+                    <div *ngIf="(cabeza.touched || cabeza.dirty) && cabeza.errors">
+                        <div *ngIf="cabeza?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+            
+                </div>
+    
+            </div>
+            <input type="hidden" name="_id" [ngModel]="list['_doc'].sid" class="form-control">
+            <input type="hidden" name="_id2" [ngModel]="pat.sid" class="form-control">
+                
+            <br>
+            <button *ngIf="!upForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button *ngIf="upForm.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>
+            
+        </form>
+        <br><br>
+        
+    </div>
+
+
+</div>

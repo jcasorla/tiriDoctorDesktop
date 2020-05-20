@@ -1,0 +1,241 @@
+<div *ngIf="errors">
+    <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+</div>
+
+<div class='col-lg'>
+    <br>
+    <form  (submit)="onSubmit($event, newForm)" #newForm="ngForm">
+        <div class="form-row">
+                
+            <div class="form-group col-md-4">
+                <label class="required" for="firstName">Primer Nombre</label>                    
+                <input type="text" name="firstName"
+                required
+                minlength="3" 
+                [(ngModel)]="editPatient.firstName"
+                #firstName="ngModel" 
+                class="form-control" >
+                <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
+                    <div *ngIf="firstName?.errors?.required" class="alert alert-danger">
+                        necesario
+                    </div>
+                    <div *ngIf="firstName?.errors?.minlength" class="alert alert-danger">
+                        el primer nombre debe tener
+                        {{ firstName?.errors?.minlength.requiredLength }} letras
+                    </div>
+                </div>
+        
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="required" for="lastName">Apellido</label>
+                <input type="text" name="lastName" [(ngModel)]="editPatient.lastName" class="form-control"
+                required
+                minlength="3" 
+                #lastName="ngModel" 
+                >
+            <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
+                <div *ngIf="lastName?.errors?.required" class="alert alert-danger">
+                    necesario
+                </div>
+                <div *ngIf="lastName?.errors?.minlength" class="alert alert-danger">
+                    el primer appellido debe tener
+                    {{ lastName?.errors?.minlength.requiredLength }} letras
+                </div>
+                
+            </div>
+        
+            </div>
+            <div class="form-group col-md-4">
+                <label class="required" for="sLastName">Segundo Apellido</label>
+                <input type="text" name="sLastName" [(ngModel)]="editPatient.sLastName" class="form-control" 
+                required
+                minlength="3"  
+                #sLastName="ngModel" 
+                >
+                
+                <div *ngIf="(sLastName.touched || sLastName.dirty) && sLastName.errors">
+                    <div *ngIf="sLastName?.errors?.required" class="alert alert-danger">
+                        necesario
+                    </div>
+                    <div *ngIf="sLastName?.errors?.minlength" class="alert alert-danger">
+                        el primer appellido debe tener
+                        {{ sLastName?.errors?.minlength.requiredLength }} letras
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
+        <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label class="required" for="sex">Sexo</label>
+                    <select class="form-control" name="sexo" [(ngModel)]="editPatient.sex" required #sex="ngModel">
+                        <option></option>
+                        <option>M</option>
+                        <option>F</option>
+                        
+                    </select>
+                    <div *ngIf="(sex.touched || sex.dirty) && sex.errors">
+                        <div *ngIf="sex?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>                
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+                    <label class="required" for="age">Edad</label>
+                    <input type="text" class="form-control"  name="age" [(ngModel)]="editPatient.age" required #age="ngModel" pattern="^[0-9]+$">
+                    <div *ngIf="(age.touched || age.dirty) && age.errors">
+                        <div *ngIf="age?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="age?.errors?.pattern" class="alert alert-danger">
+                            solo numeros
+                        </div>                  
+                        
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-3">
+                    <label class="required" for="phone">Telefono</label>
+                    <input type="text" class="form-control"  name="phone" [(ngModel)]="editPatient.phone"
+                    required
+                    minlength="7"
+                    pattern="^[0-9 \-()+]+$" 
+                    #phone="ngModel">
+    
+                    <div *ngIf="(phone.touched || phone.dirty) && phone.errors">
+                        <div *ngIf="phone?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="phone?.errors?.minlength" class="alert alert-danger">
+                            el telefono debe tener
+                            {{ phone?.errors?.minlength.requiredLength }} digitos
+                        </div>
+                        <div *ngIf="phone?.errors?.pattern" class="alert alert-danger">
+                            el telefono debe tener solo digitos
+                        </div>     
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="email">Correo</label>
+                    <input type="email" class="form-control"  name="email" [(ngModel)]="editPatient.email"
+                    #email="ngModel"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                   
+                    <div *ngIf="(email.touched || email.dirty) && email.errors">                   
+                        <div *ngIf="email?.errors && email?.errors?.pattern" class="alert alert-danger">
+                            el correo es invalido
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group col-lg">
+                    <label for="ocupation">ocupacion</label>
+                    <input type="text" name="ocupation" class="form-control" [(ngModel)]="editPatient.occupation">
+            
+                </div>
+            </div>
+        
+        <div class="form-row">        
+                        
+            <div class="form-group col-md-3">
+                <label for="address">Dirreccion</label>                    
+                <input class="form-control" type="text" name="address" [(ngModel)]="editPatient.address">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="colonia">Colonia</label>                    
+                <input class="form-control" type="text" name="colonia" [(ngModel)]="editPatient.colonia">
+            </div>
+            
+            <div class="form-group col-sm-2">
+                <label class="required" for="ciudad">Ciudad</label>                    
+                <input class="form-control" type="text" name="ciudad" [(ngModel)]="editPatient.city"
+                required
+                minlength="4"  
+                #city="ngModel">
+
+                <div *ngIf="(city.touched || city.dirty) && city.errors">
+                    <div *ngIf="city?.errors?.required" class="alert alert-danger">
+                        necesario
+                    </div>
+                    <div *ngIf="city?.errors?.minlength" class="alert alert-danger">
+                        la ciudad debe tener
+                        {{ city?.errors?.minlength.requiredLength }} digitos
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="required" for="state">Estado</label>
+                <select class="form-control" name="state" [(ngModel)]="editPatient.state" required #state="ngModel" >
+                    <option></option>
+                    <option>Michoacan de Ocampo</option>
+                    <option>Extranjero</option>
+                    <option>Aguascalientes</option>
+                    <option>Baja California</option>
+                    <option>Baja California Sur</option>
+                    <option>Campeche</option>
+                    <option>Chiapas</option>
+                    <option>Chihuahua</option>
+                    <option>Ciudad de México</option>
+                    <option>Coahuila de Zaragoza</option>
+                    <option>Colima</option>
+                    <option>Durango</option>
+                    <option>Estado de México</option>
+                    <option>Guanajuato</option>
+                    <option>Guerrero</option>
+                    <option>Hidalgo</option>
+                    <option>Jalisco</option>
+                    <option>Morelos</option>
+                    <option>Nayarit</option>
+                    <option>Nuevo León</option>
+                    <option>Oaxaca</option>
+                    <option>Puebla</option>
+                    <option>Querétaro</option>
+                    <option>Quintana Roo</option>
+                    <option>San Luis Potosí</option>
+                    <option>Sinaloa</option>
+                    <option>Sonora</option>
+                    <option>Tabasco</option>
+                    <option>Tamaulipas</option>
+                    <option>Tlaxcala</option>
+                    <option>Veracruz de Ignacio de la Llave</option>
+                    <option>Yucatán</option>
+                    <option>Zacatecas</option>
+                    
+                </select>
+                <div *ngIf="(state.touched || state.dirty) && state.errors">
+                    <div *ngIf="state?.errors?.required" class="alert alert-danger">
+                        debes ingresar el estado
+                    </div>
+                   
+                    
+                </div>
+    
+            </div>
+            <div class="form-group col-sm-1">
+                <label for="zipcode">C. P.</label>                    
+                <input class="form-control" type="text" name="zipcode" [(ngModel)]="editPatient.zip" minlength="5" pattern="^[0-9]+$" #zip="ngModel">
+                <div *ngIf="zip?.errors?.pattern" class="alert alert-danger">
+                    solo numeros
+                </div>
+                <div *ngIf="zip?.errors?.minlength" class="alert alert-danger">                    
+                    {{ zip?.errors?.minlength.requiredLength }} numeros
+                </div>     
+            </div>
+        </div>
+        
+        <button *ngIf="!newForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+        <button *ngIf="newForm.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+        <button class="btn btn-danger btn-sm btn-space" [routerLink]="['/app/list']">Cancelar</button>
+        
+    </form>
+    <br>
+
+    </div>
+        
+    

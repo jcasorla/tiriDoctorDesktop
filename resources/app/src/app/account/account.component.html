@@ -1,0 +1,333 @@
+
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="text-right">Mi Cuenta</h1>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-outline-primary btn-sm" (click)="refresh()">refresh</button>
+    </div>
+
+</div>
+
+<div class='col-lg'>    
+    <br>
+       
+    <div class="form-row">
+                
+        <div class="form-group col-md-2">
+            <label for="firstName">Primer Nombre</label>                    
+            <input type="text" name="firstName" [ngModel]="user.firstName" class="form-control" readonly>               
+        </div>
+        
+        <div class="form-group col-md-2">
+            <label for="lastName">Apellido</label>
+            <input type="text" name="lastName" [ngModel]="user.lastName" class="form-control" readonly>                
+        </div>
+        <div class="form-group col-md-2">
+            <label for="slastName">Segundo Apellido</label>
+            <input type="text" name="slastName" [ngModel]="user.slastName" class="form-control" readonly>                
+        </div>
+        <div class="form-group col-md-3">
+            <label for="email">Correo</label>
+            <input type="text" name="email" [ngModel]="user.email" class="form-control" readonly>
+        </div>
+        <div class="form-group col-md-2">
+            <label for="username">username</label>
+            <input type="text" name="username" [ngModel]="user.username" class="form-control" readonly>
+    
+        </div>
+    </div>
+
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <form class="form-inline">
+            <button class="btn btn-outline-primary" type="button" (click)="showName()">Editar Nombre</button>
+            <button class="btn btn-outline-primary" type="button" (click)="showEmail()">Editar Correo</button>
+            <button class="btn btn-outline-primary" type="button" (click)="showUn()">Editar username</button>
+            <button class="btn btn-outline-primary" type="button" (click)="showPw()">Editar Contrasena</button>
+            
+        </form>
+    </nav>
+
+    <div *ngIf='displayName'>
+        <h2>Editar Nombre</h2>
+        <div *ngIf="errors">
+            <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+        </div>
+        <form  (submit)="onSubmit($event, upForm1)" #upForm1="ngForm">
+            <div class="form-row">
+                    
+                <div class="form-group col-md-2">
+                    <label class="required" for="firstName">Primer Nombre</label>                    
+                    <input type="text" name="firstName"
+                    required
+                    minlength="3" 
+                    [(ngModel)]="user.firstName"
+                    #firstName="ngModel" 
+                    class="form-control" >
+                    <div *ngIf="(firstName.touched || firstName.dirty) && firstName.errors">
+                        <div *ngIf="firstName?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="firstName?.errors?.minlength" class="alert alert-danger">
+                            el primer nombre debe tener
+                            {{ firstName?.errors?.minlength.requiredLength }} letras
+                        </div>
+                    </div>
+            
+                </div>
+                
+                <div class="form-group col-md-2">
+                    <label class="required" for="lastName">Apellido</label>
+                    <input type="text" name="lastName" [(ngModel)]="user.lastName" class="form-control"
+                    required
+                    minlength="3" 
+                    #lastName="ngModel" 
+                    >
+                    <div *ngIf="(lastName.touched || lastName.dirty) && lastName.errors">
+                        <div *ngIf="lastName?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="lastName?.errors?.minlength" class="alert alert-danger">
+                            el primer appellido debe tener
+                            {{ lastName?.errors?.minlength.requiredLength }} letras
+                        </div>
+                        
+                    </div>
+            
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="required" for="slastName">Segundo Apellido</label>
+                    <input type="text" name="slastName" [(ngModel)]="user.slastName" class="form-control"
+                    required
+                    minlength="3" 
+                    #slastName="ngModel" 
+                    >
+                    <div *ngIf="(slastName.touched || slastName.dirty) && slastName.errors">
+                        <div *ngIf="slastName?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="slastName?.errors?.minlength" class="alert alert-danger">
+                            el segundo appellido debe tener
+                            {{ slastName?.errors?.minlength.requiredLength }} letras
+                        </div>
+                        
+                    </div>
+            
+                </div>
+               
+            </div>
+            <button *ngIf="upForm1.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button *ngIf="!upForm1.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+            
+        </form>
+        
+           
+        <br>    
+
+    </div>
+
+    <div *ngIf='displayEmail'>
+        <h2>Editar Correo Electronico</h2>
+        <div *ngIf="errors">
+            <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+        </div>
+        <form (submit)="onSubmitEmail(upForm2)" #upForm2="ngForm">
+            <div class="form-row">   
+
+                <div class="form-group col-md-3">
+                    <label class="required" for="email">Correo</label>
+                    <input type="text" name="email"  [ngModel]="user2.email" class="form-control"
+                    
+                    required
+                    #email="ngModel"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                    >
+                    <div *ngIf="(email.touched || email.dirty) && email.errors">
+                        <div *ngIf="email?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="email?.errors && email?.errors?.pattern" class="alert alert-danger">
+                            el correo es invalido
+                        </div>
+                        
+                    </div>
+            
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="required" for="password">Contraseña</label>
+                    <input type="password" name="password" [ngModel]="user2.password" class="form-control"
+                    required
+                    #pwd="ngModel" 
+                    >
+                    <div *ngIf="(pwd.touched || pwd.dirty) && pwd.errors">
+                        <div *ngIf="pwd?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>                        
+                        
+                    </div>
+            
+                </div>
+               
+            </div>
+            <input type="hidden" name="_id" [ngModel]="user._id" class="form-control">
+            <input type="hidden" name="firstName" [ngModel]="user.firstName" class="form-control">
+            <input type="hidden" name="lastName" [ngModel]="user.lastName" class="form-control">
+            <input type="hidden" name="lastName" [ngModel]="user.slastName" class="form-control">
+            <input type="hidden" name="username" [ngModel]="user.username" class="form-control">
+            <input type="hidden" name="createdAt" [ngModel]="user.createdAt" class="form-control">
+            <button *ngIf="upForm2.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button *ngIf="!upForm2.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+            
+        </form>
+        
+           
+        <br>    
+
+
+    </div>
+
+    <div *ngIf='displayUn'>
+        <h2>Editar username</h2>
+        <div *ngIf="errors">
+            <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+        </div>
+        <form (submit)="onSubmitUser(upForm3)" #upForm3="ngForm">
+            <div class="form-row">   
+
+                <div class="form-group col-md-3">
+                    <label class="required" for="username">username</label>
+                    <input type="text" name="username" [ngModel]="user2.username" class="form-control"
+                    required
+                    minlength="5" 
+                    #username="ngModel" 
+                    >
+                    <div *ngIf="(username.touched || username.dirty) && username.errors">
+                        <div *ngIf="username?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="username?.errors?.minlength" class="alert alert-danger">
+                            el username debe tener
+                            {{ username?.errors?.minlength.requiredLength }} letras
+                        </div>
+                        
+                    </div>
+            
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="required" for="password">Contraseña</label>
+                    <input type="password" name="password" [ngModel]="user2.password" class="form-control"
+                    required
+                    #pwd="ngModel" 
+                    >
+                    <div *ngIf="(pwd.touched || pwd.dirty) && pwd.errors">
+                        <div *ngIf="pwd?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>                        
+                        
+                    </div>
+            
+                </div>
+               
+            </div>
+            <input type="hidden" name="_id" [ngModel]="user._id" class="form-control">
+            <input type="hidden" name="firstName" [ngModel]="user.firstName" class="form-control">
+            <input type="hidden" name="lastName" [ngModel]="user.lastName" class="form-control">
+            <input type="hidden" name="lastName" [ngModel]="user.slastName" class="form-control">
+            <input type="hidden" name="email" [ngModel]="user.email" class="form-control">
+            <input type="hidden" name="createdAt" [ngModel]="user.createdAt" class="form-control">
+            <button *ngIf="upForm3.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button *ngIf="!upForm3.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+            
+        </form>
+        
+           
+        <br>            
+
+    </div>
+
+    <div *ngIf='displayPwd'>
+        <h2>Editar Contraseña</h2>
+        <div *ngIf="errors">
+            <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+        </div>
+        <form (submit)="onSubmitPwd(upForm4)" #upForm4="ngForm">
+            <div class="form-row">   
+
+                <div class="form-group col-md-3">
+                    <label class="required" for="current">Contraseña Actual</label>
+                    <input type="password" name="current" [ngModel]="user2.current" class="form-control"
+                    required
+                    #current="ngModel"                     
+                    >
+                    <div *ngIf="(current.touched || current.dirty) && current.errors">
+                        <div *ngIf="current?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        
+                        
+                    </div>
+            
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="required" for="password">Nueva Contraseña</label>
+                    <input type="password" name="password" [ngModel]="user2.password" class="form-control"
+                    required
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"                    
+                    #pwd="ngModel" 
+                    >
+                    <div *ngIf="(pwd.touched || pwd.dirty) && pwd.errors">
+                        <div *ngIf="pwd?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="pwd?.errors && pwd?.errors?.pattern" class="alert alert-danger">
+                            contraseña debe ser 8 de largo, por lo menos una mayuscula y miniscula y character especial
+                        </div>                       
+                        
+                    </div>
+            
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="required" for="cpwd">Confirma Contraseña</label>
+                    <input type="password" name="cpwd" [ngModel]="user2.cpwd" class="form-control"
+                    required
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                    #cpwd="ngModel" 
+                    >
+                    <div *ngIf="(cpwd.touched || cpwd.dirty) && cpwd.errors">
+                        <div *ngIf="cpwd?.errors?.required" class="alert alert-danger">
+                            necesario
+                        </div>
+                        <div *ngIf="cpwd?.errors && cpwd?.errors?.pattern" class="alert alert-danger">
+                            confirma contraseña debe ser 8 de largo, por lo menos una mayuscula y miniscula y character especial
+                        </div> 
+                    </div>
+            
+                </div>
+               
+            </div>
+            <input type="hidden" name="_id" [ngModel]="user._id" class="form-control">
+            <input type="hidden" name="username" [ngModel]="user.username" class="form-control">
+            <input type="hidden" name="firstName" [ngModel]="user.firstName" class="form-control">
+            <input type="hidden" name="lastName" [ngModel]="user.lastName" class="form-control">
+            <input type="hidden" name="lastName" [ngModel]="user.slastName" class="form-control">
+            <input type="hidden" name="email" [ngModel]="user.email" class="form-control">
+            <input type="hidden" name="createdAt" [ngModel]="user.createdAt" class="form-control">
+            <button *ngIf="upForm4.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button *ngIf="!upForm4.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+            
+        </form>
+        
+           
+        <br>    
+
+    </div>
+
+    
+
+</div>
+        

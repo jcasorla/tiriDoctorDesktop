@@ -1,0 +1,247 @@
+<h2>Antecedentes Familiares</h2>
+
+<div class="col-lg">
+    <div *ngIf="errors">
+        <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+    </div>
+</div>
+
+<div class='col-lg scroll scrollbar-primary' *ngIf="show">
+    <br>
+    <form  #newForm="ngForm" (submit)="onCreate(pat,newForm)" >
+        <div class="form-check form-check-inline">
+            <label class="form-check-label required" >Padre Vivo?</label>
+        </div>
+     
+        <div class="form-check form-check-inline">            
+            <input class="form-check-input" type="radio" name="padreVivo" value="Si" [ngModel]="familiar.padreVivo">
+            <label class="form-check-label" for="padreVivo">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="padreVivo" value="No" [ngModel]="familiar.padreVivo">
+            <label class="form-check-label" for="padreVivo">No</label>
+        </div>
+        
+        <br>
+        <div class="form-row">
+            <div class="form-group col-lg">
+                <label for="fatherContent" class="required">Enfermedades que Padece</label>
+                
+                <textarea class="form-control"  name="commentPadre" cols="3" rows="3" [ngModel]="familiar.commentPadre"
+                required
+                #commentPadre="ngModel" ></textarea>
+                <div *ngIf="(commentPadre.touched || commentPadre.dirty) && commentPadre.errors">
+                    <div *ngIf="commentPadre?.errors?.required" class="alert alert-danger">
+                        Es necesario ingresar enfermedades que padece Padre
+                    </div>
+                    
+                </div>
+        
+            </div>
+
+        </div>
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label required" >Madre Viva?</label>
+        </div>
+        <div class="form-check form-check-inline">            
+            <input class="form-check-input" type="radio" name="madreViva" value="Si" [ngModel]="familiar.madreViva">
+            <label class="form-check-label" for="madreViva">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="madreViva" value="No" [ngModel]="familiar.madreViva">
+            <label class="form-check-label" for="madreViva">No</label>
+        </div>
+        
+        <br>
+        <div class="form-row">
+            <div class="form-group col-lg">
+                <label for="motherContent" class='required'>Enfermedades que Padece</label>
+                
+                <textarea class="form-control"  name="commentMadre" cols="3" rows="3" [ngModel]="familiar.commentMadre"
+                required
+                #commentMadre="ngModel" ></textarea>
+                <div *ngIf="(commentMadre.touched || commentMadre.dirty) && commentMadre.errors">
+                    <div *ngIf="commentMadre?.errors?.required" class="alert alert-danger">
+                        Es necesario ingresar enfermedades que padece Madre
+                    </div>
+                    
+                </div>
+        
+            </div>
+
+        </div>
+        <div class="form-check form-check-inline ">
+            <label class="form-check-label required" >Cuantos Hermanos?</label>
+                
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="col-sm-6" type="text" name="hermanos" [ngModel]="familiar.hermanos "
+            required
+            pattern="^[0-9]+$"
+            #hermanos="ngModel">         
+                
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label" >Vivos?</label>
+        </div>
+        <div class="form-check form-check-inline">            
+            <input class="form-check-input" type="radio" name="hermanosVivos" value="Si" [ngModel]="familiar.hermanosVivos">
+            <label class="form-check-label" for="hermanosVivos">Si</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="hermanosVivos" value="No" [ngModel]="familiar.hermanosVivos">
+            <label class="form-check-label" for="hermanosVivos">No</label>
+        </div>
+        <div *ngIf="(hermanos.touched || hermanos.dirty) && hermanos.errors">
+            <div *ngIf="hermanos?.errors?.required" class="alert alert-danger">
+                Es necesario ingresar cuantos hermanos
+            </div>
+            <div *ngIf="hermanos?.errors?.pattern" class="alert alert-danger">
+                solo numeros
+            </div>  
+            
+        </div>
+        <br>
+        
+        <div class="form-row">
+            <div class="form-group col-lg">
+                <label for="broContent">Enfermedades que Padecen</label>
+                
+                <textarea class="form-control"  name="commentHermanos" cols="3" rows="3" [ngModel]="familiar.commentHermanos"></textarea>
+        
+            </div>
+
+        </div>
+
+        <button *ngIf="!newForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Añadir</button>
+        <button *ngIf="newForm.valid" class="btn btn-primary btn-sm btn-space">Añadir</button>
+        <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+        
+    </form>
+    <br><br>
+
+</div>
+
+<div *ngIf="!show">
+    <div class='col-lg scroll scrollbar-primary' *ngFor="let list of pat.familiar">
+        <br>
+        <form  #upForm="ngForm" (submit)="onUpdate(upForm)">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label required" >Padre Vivo?</label>
+            </div>
+            <div class="form-check form-check-inline">            
+                <input class="form-check-input" type="radio" name="padreVivo" value="Si" [ngModel]="list['_doc'].padreVivo">
+                <label class="form-check-label" for="padreVivo">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="padreVivo" value="No" [ngModel]="list['_doc'].padreVivo">
+                <label class="form-check-label" for="padreVivo">No</label>
+            </div>
+            
+            <br>
+            <div class="form-row">
+                <div class="form-group col-lg">
+                    <label for="fatherContent" class="required">Enfermedades que Padece</label>
+                    
+                    <textarea class="form-control"  name="commentPadre" cols="3" rows="3" [ngModel]="list['_doc'].commentPadre"
+                    required
+                    #commentPadre="ngModel" ></textarea>
+                    <div *ngIf="(commentPadre.touched || commentPadre.dirty) && commentPadre.errors">
+                        <div *ngIf="commentPadre?.errors?.required" class="alert alert-danger">
+                            Es necesario ingresar enfermedades que padece Padre
+                        </div>
+                        
+                    </div>
+            
+                </div>
+
+            </div>
+
+            <div class="form-check form-check-inline">
+                <label class="form-check-label required" >Madre Viva?</label>
+            </div>
+            <div class="form-check form-check-inline">            
+                <input class="form-check-input" type="radio" name="madreViva" value="Si" [ngModel]="list['_doc'].madreViva">
+                <label class="form-check-label" for="madreViva">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="madreViva" value="No" [ngModel]="list['_doc'].madreViva">
+                <label class="form-check-label" for="madreViva">No</label>
+            </div>
+            
+            <br>
+            <div class="form-row">
+                <div class="form-group col-lg">
+                    <label for="motherContent" class="required">Enfermedades que Padece</label>
+                    
+                    <textarea class="form-control"  name="commentMadre" cols="3" rows="3" [ngModel]="list['_doc'].commentMadre"
+                    required
+                #commentMadre="ngModel" ></textarea>
+                <div *ngIf="(commentMadre.touched || commentMadre.dirty) && commentMadre.errors">
+                    <div *ngIf="commentMadre?.errors?.required" class="alert alert-danger">
+                        Es necesario ingresar enfermedades que padece Madre
+                    </div>
+                    
+                </div>
+            
+                </div>
+
+            </div>
+            <div class="form-check form-check-inline ">
+                <label class="form-check-label required" >Cuantos Hermanos?</label>
+                    
+            </div>
+            <div class="form-check form-check-inline ">
+                <input class="col-sm-6" type="text" name="hermanos" [ngModel]="list['_doc'].hermanos"
+                required
+                pattern="^[0-9]+$"
+                #hermanos="ngModel">     
+                    
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" >Vivos?</label>
+            </div>
+            <div class="form-check form-check-inline">            
+                <input class="form-check-input" type="radio" name="hermanosVivos" value="Si" [ngModel]="list['_doc'].hermanosVivos">
+                <label class="form-check-label" for="hermanosVivos">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="hermanosVivos" value="No" [ngModel]="list['_doc'].hermanosVivos">
+                <label class="form-check-label" for="hermanosVivos">No</label>
+            </div>
+            <div *ngIf="(hermanos.touched || hermanos.dirty) && hermanos.errors">
+                <div *ngIf="hermanos?.errors?.required" class="alert alert-danger">
+                    Es necesario ingresar cuantos hermanos
+                </div>
+                <div *ngIf="hermanos?.errors?.pattern" class="alert alert-danger">
+                    solo numeros
+                </div> 
+                
+            </div>
+            <br>
+            
+            <div class="form-row">
+                <div class="form-group col-lg">
+                    <label for="broContent">Enfermedades que Padecen</label>
+                    
+                    <textarea class="form-control"  name="commentHermanos" cols="3" rows="3" [ngModel]="list['_doc'].commentHermanos"></textarea>
+            
+                </div>
+
+            </div>
+            <input type="hidden" name="_id" [ngModel]="list['_doc'].sid" class="form-control">
+            <input type="hidden" name="_id2" [ngModel]="pat.sid" class="form-control">
+    
+            
+            
+            <button *ngIf="!upForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button *ngIf="upForm.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+                
+            </form>
+            <br><br>
+        
+        </div>
+
+</div>

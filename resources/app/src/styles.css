@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    background-image: url(./assets/img/medical-back5.jpg);
+}
+label.required::after {
+    content: " *";
+    color: red;
+}
+
+.scroll{
+    height:520px;
+    overflow-y: scroll;
+}
+.scroll2{
+    height:500px;
+    overflow-y: scroll;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+    width: 12px;   
+}
+    
+.scrollbar-primary::-webkit-scrollbar-thumb {
+border-radius: 10px;
+-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+background-color: #4285F4; }
+
+.fa {
+    padding: 7px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 0px;
+    
+  }
+  
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+  
+
+  
+  .fa-linkedin {
+    background: #007bb5;
+    color: white;
+  }
+
+  .centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-space {
+    margin-right: 5px;
+}
+  

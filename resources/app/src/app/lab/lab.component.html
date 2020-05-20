@@ -1,0 +1,478 @@
+<div class="row">
+    <div class="col-sm-2">
+        <h2>Laboratorio</h2>
+    </div>
+    <div class="col-sm-5">
+        <button *ngIf="!showtable" class="btn btn-outline-primary btn-sm" (click)="showTable()">Tabla</button>
+        <button *ngIf="showtable" class="btn btn-outline-danger btn-sm" (click)="hideTable()">Ocultar Tabla</button>
+    </div>
+
+</div>
+<div class='col-lg scroll scrollbar-primary'>
+    <br>
+    <div class="col-lg">
+        <div *ngIf="errors">
+            <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+        </div>
+    </div>
+    <div *ngIf="showtable" class="container-fluid col-lg-10">
+
+        <div *ngIf="showGrid">
+            <form  #saveForm="ngForm" (submit)="onCreate(pat, saveForm)">
+                <table class="table-sm table-light" > 
+                   
+                    <tbody>
+                        
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cella1" [ngModel]="lab.cella1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cella2" [ngModel]="lab.cella2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cella3" [ngModel]="lab.cella3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cella4" [ngModel]="lab.cella4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cella5" [ngModel]="lab.cella5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cella6" [ngModel]="lab.cella6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cella7" [ngModel]="lab.cella7"></td>              
+                        </tr>
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellb1" [ngModel]="lab.cellb1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellb2" [ngModel]="lab.cellb2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellb3" [ngModel]="lab.cellb3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellb4" [ngModel]="lab.cellb4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellb5" [ngModel]="lab.cellb5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellb6" [ngModel]="lab.cellb6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellb7" [ngModel]="lab.cellb7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellc1" [ngModel]="lab.cellc1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellc2" [ngModel]="lab.cellc2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellc3" [ngModel]="lab.cellc3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellc4" [ngModel]="lab.cellc4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellc5" [ngModel]="lab.cellc5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellc6" [ngModel]="lab.cellc6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellc7" [ngModel]="lab.cellc7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="celld1" [ngModel]="lab.celld1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="celld2" [ngModel]="lab.celld2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celld3" [ngModel]="lab.celld3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celld4" [ngModel]="lab.celld4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celld5" [ngModel]="lab.celld5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celld6" [ngModel]="lab.celld6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celld7" [ngModel]="lab.celld7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="celle1" [ngModel]="lab.celle1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="celle2" [ngModel]="lab.celle2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celle3" [ngModel]="lab.celle3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celle4" [ngModel]="lab.celle4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celle5" [ngModel]="lab.celle5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celle6" [ngModel]="lab.celle6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celle7" [ngModel]="lab.celle7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellf1" [ngModel]="lab.cellf1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellf2" [ngModel]="lab.cellf2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellf3" [ngModel]="lab.cellf3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellf4" [ngModel]="lab.cellf4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellf5" [ngModel]="lab.cellf5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellf6" [ngModel]="lab.cellf6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellf7" [ngModel]="lab.cellf7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellg1" [ngModel]="lab.cellg1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellg2" [ngModel]="lab.cellg2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellg3" [ngModel]="lab.cellg3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellg4" [ngModel]="lab.cellg4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellg5" [ngModel]="lab.cellg5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellg6" [ngModel]="lab.cellg6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellg7" [ngModel]="lab.cellg7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellh1" [ngModel]="lab.cellh1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellh2" [ngModel]="lab.cellh2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellh3" [ngModel]="lab.cellh3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellh4" [ngModel]="lab.cellh4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellh5" [ngModel]="lab.cellh5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellh6" [ngModel]="lab.cellh6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellh7" [ngModel]="lab.cellh7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="celli1" [ngModel]="lab.celli1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="celli2" [ngModel]="lab.celli2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celli3" [ngModel]="lab.celli3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celli4" [ngModel]="lab.celli4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celli5" [ngModel]="lab.celli5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celli6" [ngModel]="lab.celli6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="celli7" [ngModel]="lab.celli7"></td>              
+                        </tr> 
+                        <tr class="d-flex">
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellj1" [ngModel]="lab.cellj1"></td>
+                            <td class="col-sm"><input class="col-sm" type="text" name="cellj2" [ngModel]="lab.cellj2"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellj3" [ngModel]="lab.cellj3"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellj4" [ngModel]="lab.cellj4"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellj5" [ngModel]="lab.cellj5"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellj6" [ngModel]="lab.cellj6"></td>
+                            <td class="col-sm"><input class="col-sm"  type="text" name="cellj7" [ngModel]="lab.cellj7"></td>              
+                        </tr>
+                
+                    </tbody> 
+                </table>
+                <button class="btn btn-primary btn-sm btn-space">Añadir</button>
+                <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>
+                </form>
+                <br>
+                <br> 
+
+        </div>
+        <div *ngIf="!showGrid">
+            <div *ngFor="let list of pat.grid">
+                <form  #saveForm="ngForm" (submit)="onUpdate(saveForm)">
+                    <table class="table-sm table-light" > 
+                       
+                        <tbody>
+                            
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cella1" [ngModel]="list['_doc'].cella1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cella2" [ngModel]="list['_doc'].cella2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cella3" [ngModel]="list['_doc'].cella3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cella4" [ngModel]="list['_doc'].cella4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cella5" [ngModel]="list['_doc'].cella5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cella6" [ngModel]="list['_doc'].cella6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cella7" [ngModel]="list['_doc'].cella7"></td>              
+                            </tr>
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellb1" [ngModel]="list['_doc'].cellb1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellb2" [ngModel]="list['_doc'].cellb2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellb3" [ngModel]="list['_doc'].cellb3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellb4" [ngModel]="list['_doc'].cellb4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellb5" [ngModel]="list['_doc'].cellb5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellb6" [ngModel]="list['_doc'].cellb6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellb7" [ngModel]="list['_doc'].cellb7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellc1" [ngModel]="list['_doc'].cellc1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellc2" [ngModel]="list['_doc'].cellc2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellc3" [ngModel]="list['_doc'].cellc3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellc4" [ngModel]="list['_doc'].cellc3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellc5" [ngModel]="list['_doc'].cellc4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellc6" [ngModel]="list['_doc'].cellc5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellc7" [ngModel]="list['_doc'].cellc6"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="celld1" [ngModel]="list['_doc'].celld1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="celld2" [ngModel]="list['_doc'].celld2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celld3" [ngModel]="list['_doc'].celld3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celld4" [ngModel]="list['_doc'].celld4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celld5" [ngModel]="list['_doc'].celld5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celld6" [ngModel]="list['_doc'].celld6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celld7" [ngModel]="list['_doc'].celld7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="celle1" [ngModel]="list['_doc'].celle1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="celle2" [ngModel]="list['_doc'].celle2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celle3" [ngModel]="list['_doc'].celle3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celle4" [ngModel]="list['_doc'].celle4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celle5" [ngModel]="list['_doc'].celle5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celle6" [ngModel]="list['_doc'].celle6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celle7" [ngModel]="list['_doc'].celle7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellf1" [ngModel]="list['_doc'].cellf1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellf2" [ngModel]="list['_doc'].cellf2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellf3" [ngModel]="list['_doc'].cellf3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellf4" [ngModel]="list['_doc'].cellf4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellf5" [ngModel]="list['_doc'].cellf5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellf6" [ngModel]="list['_doc'].cellf6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellf7" [ngModel]="list['_doc'].cellf7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellg1" [ngModel]="list['_doc'].cellg1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellg2" [ngModel]="list['_doc'].cellg2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellg3" [ngModel]="list['_doc'].cellg3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellg4" [ngModel]="list['_doc'].cellg4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellg5" [ngModel]="list['_doc'].cellg5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellg6" [ngModel]="list['_doc'].cellg6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellg7" [ngModel]="list['_doc'].cellg7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellh1" [ngModel]="list['_doc'].cellh1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellh2" [ngModel]="list['_doc'].cellh2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellh3" [ngModel]="list['_doc'].cellh3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellh4" [ngModel]="list['_doc'].cellh4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellh5" [ngModel]="list['_doc'].cellh5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellh6" [ngModel]="list['_doc'].cellh6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellh7" [ngModel]="list['_doc'].cellh7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="celli1" [ngModel]="list['_doc'].celli1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="celli2" [ngModel]="list['_doc'].celli2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celli3" [ngModel]="list['_doc'].celli3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celli4" [ngModel]="list['_doc'].celli4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celli5" [ngModel]="list['_doc'].celli5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celli6" [ngModel]="list['_doc'].celli6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="celli7" [ngModel]="list['_doc'].celli7"></td>              
+                            </tr> 
+                            <tr class="d-flex">
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellj1" [ngModel]="list['_doc'].cellj1"></td>
+                                <td class="col-sm"><input class="col-sm" type="text" name="cellj2" [ngModel]="list['_doc'].cellj2"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellj3" [ngModel]="list['_doc'].cellj3"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellj4" [ngModel]="list['_doc'].cellj4"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellj5" [ngModel]="list['_doc'].cellj5"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellj6" [ngModel]="list['_doc'].cellj6"></td>
+                                <td class="col-sm"><input class="col-sm"  type="text" name="cellj7" [ngModel]="list['_doc'].cellj7"></td>              
+                            </tr>
+                    
+                        </tbody> 
+                    </table>
+                    <input type="hidden" name="_id" [ngModel]="list['_doc'].sid" class="form-control">
+                    <input type="hidden" name="_id2" [ngModel]="pat.sid" class="form-control">
+                    <button class="btn btn-primary btn-sm btn-space">Salvar</button>
+                    <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>
+                    </form>
+                    <br>
+                    <br> 
+
+            </div>
+            
+
+        </div>
+        
+       
+    </div>
+
+    <div *ngIf="!showtable" class="col-lg">
+        <div *ngIf="showlab">
+            <form  #saveForm1="ngForm" (submit)="onCreate2(pat, saveForm1)">
+           
+                <div class="form-row">
+                    <div class="form-group col-lg">
+                        <label for="imagen">Estudios de Imagen</label>
+                        
+                        <textarea class="form-control"  name="imagen" [ngModel]="lab.imagen" cols="5" rows="5" 
+                        minlength="10"
+                        #imagen="ngModel"></textarea>
+                        <div *ngIf="(imagen.touched || imagen.dirty) && imagen.errors"> 
+                            <div *ngIf="imagen?.errors?.minlength" class="alert alert-danger">
+                                Por lo menos
+                                {{ imagen?.errors?.minlength.requiredLength }} letras
+                            </div>
+                            
+                        </div>
+                
+                    </div>
+                    <div class="form-group col-lg">
+                        <label for="consulta">Otros</label>
+                        
+                        <textarea class="form-control"  name="otro" [ngModel]="lab.otro" cols="5" rows="5"                    
+                        minlength="10"
+                        #otro="ngModel"></textarea>
+                        <div *ngIf="(otro.touched || otro.dirty) && otro.errors">
+                            
+                            <div *ngIf="otro?.errors?.minlength" class="alert alert-danger">
+                                Por lo menos
+                                {{ otro?.errors?.minlength.requiredLength }} letras
+                            </div>
+                            
+                        </div>
+                
+                    </div>
+        
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group col-lg">
+                        <label for="torax">Torax</label>
+                        
+                        <textarea class="form-control"  name="torax" [ngModel]="lab.torax" cols="5" rows="5" 
+                        minlength="10"
+                        #torax="ngModel"></textarea>
+                        <div *ngIf="(torax.touched || torax.dirty) && torax.errors">
+                            
+                            <div *ngIf="torax?.errors?.minlength" class="alert alert-danger">
+                                Por lo menos
+                                {{ torax?.errors?.minlength.requiredLength }} letras
+                            </div>                        
+                        </div>
+                
+                    </div>
+                    <div class="form-group col-lg">
+                        <label for="abdomen">Abdomen</label>
+                        
+                        <textarea class="form-control"  name="abdomen" [ngModel]="lab.abdomen" cols="5" rows="5" 
+                        minlength="10"
+                        #abdomen="ngModel"></textarea>
+                        <div *ngIf="(abdomen.touched || abdomen.dirty) && abdomen.errors">                      
+                            <div *ngIf="abdomen?.errors?.minlength" class="alert alert-danger">
+                                Por lo menos
+                                {{ abdomen?.errors?.minlength.requiredLength }} letras
+                            </div>
+                            
+                        </div>
+                
+                    </div>
+                    
+        
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg">
+                        <label for="extre">Extremidades</label>
+                        
+                        <textarea class="form-control"  name="extre" [ngModel]="lab.extre" cols="5" rows="5" 
+                        minlength="10"
+                        #extre="ngModel"></textarea>
+                        <div *ngIf="(extre.touched || extre.dirty) && extre.errors">
+                            
+                            <div *ngIf="extre?.errors?.minlength" class="alert alert-danger">
+                                Por lo menos
+                                {{ extre?.errors?.minlength.requiredLength }} letras
+                            </div>                        
+                        </div>
+                
+                    </div>
+                    <div class="form-group col-lg">
+                        <label for="neuro">Neurologico Y Estado Mental</label>
+                        
+                        <textarea class="form-control"  name="neuro" [ngModel]="lab.neuro" cols="5" rows="5" 
+                        minlength="10"
+                        #neuro="ngModel"></textarea>
+                        <div *ngIf="(neuro.touched || neuro.dirty) && neuro.errors">                      
+                            <div *ngIf="neuro?.errors?.minlength" class="alert alert-danger">
+                                Por lo menos
+                                {{ neuro?.errors?.minlength.requiredLength }} letras
+                            </div>
+                            
+                        </div>
+                
+                    </div>
+                </div>        
+        
+                <button *ngIf="!saveForm1.valid" class="btn btn-primary btn-sm btn-space" disabled>Añadir</button>
+                <button *ngIf="saveForm1.valid" class="btn btn-primary btn-sm btn-space">Añadir</button>
+                <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>
+                
+            </form>
+
+        </div>
+        <div *ngIf="!showlab">
+            <div *ngFor="let list of pat.lab">
+                <form  #saveForm1="ngForm" (submit)="onUpdate2(saveForm1)">
+           
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <label for="imagen">Estudios de Imagen</label>
+                            
+                            <textarea class="form-control"  name="imagen" [ngModel]="list['_doc'].imagen" cols="5" rows="5" 
+                            minlength="10"
+                            #imagen="ngModel"></textarea>
+                            <div *ngIf="(imagen.touched || imagen.dirty) && imagen.errors"> 
+                                <div *ngIf="imagen?.errors?.minlength" class="alert alert-danger">
+                                    Por lo menos
+                                    {{ imagen?.errors?.minlength.requiredLength }} letras
+                                </div>
+                                
+                            </div>
+                    
+                        </div>
+                        <div class="form-group col-lg">
+                            <label for="consulta">Otros</label>
+                            
+                            <textarea class="form-control"  name="otro" [ngModel]="list['_doc'].otro" cols="5" rows="5"                    
+                            minlength="10"
+                            #otro="ngModel"></textarea>
+                            <div *ngIf="(otro.touched || otro.dirty) && otro.errors">
+                                
+                                <div *ngIf="otro?.errors?.minlength" class="alert alert-danger">
+                                    Por lo menos
+                                    {{ otro?.errors?.minlength.requiredLength }} letras
+                                </div>
+                                
+                            </div>
+                    
+                        </div>
+            
+                    </div>
+        
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <label for="torax">Torax</label>
+                            
+                            <textarea class="form-control"  name="torax" [ngModel]="list['_doc'].torax" cols="5" rows="5" 
+                            minlength="10"
+                            #torax="ngModel"></textarea>
+                            <div *ngIf="(torax.touched || torax.dirty) && torax.errors">
+                                
+                                <div *ngIf="torax?.errors?.minlength" class="alert alert-danger">
+                                    Por lo menos
+                                    {{ torax?.errors?.minlength.requiredLength }} letras
+                                </div>                        
+                            </div>
+                    
+                        </div>
+                        <div class="form-group col-lg">
+                            <label for="abdomen">Abdomen</label>
+                            
+                            <textarea class="form-control"  name="abdomen" [ngModel]="list['_doc'].abdomen" cols="5" rows="5" 
+                            minlength="10"
+                            #abdomen="ngModel"></textarea>
+                            <div *ngIf="(abdomen.touched || abdomen.dirty) && abdomen.errors">                      
+                                <div *ngIf="abdomen?.errors?.minlength" class="alert alert-danger">
+                                    Por lo menos
+                                    {{ abdomen?.errors?.minlength.requiredLength }} letras
+                                </div>
+                                
+                            </div>
+                    
+                        </div>
+                        
+            
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg">
+                            <label for="extre">Extremidades</label>
+                            
+                            <textarea class="form-control"  name="extre" [ngModel]="list['_doc'].extre" cols="5" rows="5" 
+                            minlength="10"
+                            #extre="ngModel"></textarea>
+                            <div *ngIf="(extre.touched || extre.dirty) && extre.errors">
+                                
+                                <div *ngIf="extre?.errors?.minlength" class="alert alert-danger">
+                                    Por lo menos
+                                    {{ extre?.errors?.minlength.requiredLength }} letras
+                                </div>                        
+                            </div>
+                    
+                        </div>
+                        <div class="form-group col-lg">
+                            <label for="neuro">Neurologico Y Estado Mental</label>
+                            
+                            <textarea class="form-control"  name="neuro" [ngModel]="list['_doc'].neuro" cols="5" rows="5" 
+                            minlength="10"
+                            #neuro="ngModel"></textarea>
+                            <div *ngIf="(neuro.touched || neuro.dirty) && neuro.errors">                      
+                                <div *ngIf="neuro?.errors?.minlength" class="alert alert-danger">
+                                    Por lo menos
+                                    {{ neuro?.errors?.minlength.requiredLength }} letras
+                                </div>
+                                
+                            </div>
+                    
+                        </div>
+                    </div>
+                    <input type="hidden" name="_id" [ngModel]="list['_doc'].sid" class="form-control">
+                    <input type="hidden" name="_id2" [ngModel]="pat.sid" class="form-control">      
+            
+                    <button *ngIf="!saveForm1.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+                    <button *ngIf="saveForm1.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+                    <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>
+                    
+                </form>
+    
+
+            </div>
+
+        </div>
+        
+      
+        <br><br>
+    </div>
+</div>
+

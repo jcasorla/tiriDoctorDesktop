@@ -1,0 +1,323 @@
+<h2>Antecedentes Gineco-obstetricos</h2>
+
+<div class="col-lg">
+    <div *ngIf="errors">
+        <p class="text-danger" *ngFor="let item of errors ">{{item}}</p>
+    </div>
+</div>
+
+<div class='col-lg scroll scrollbar-primary' *ngIf="show">
+ 
+    <form   #newForm="ngForm" (submit)="onCreate(pat,newForm)">
+      
+        <div class="form-row">
+            <div class="form-group col-sm-3">
+                <label for="menarquia" class="required">Menarquia</label>                    
+                <input class="form-control" type="text" name="menarquia" [ngModel]="gineco.menarquia"
+                required
+                #menarquia="ngModel">
+                <div *ngIf="(menarquia.touched || menarquia.dirty) && menarquia.errors">
+                    <div *ngIf="menarquia?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-3">
+                <label for="ritmo" class="required">Ritmo</label>                    
+                <input class="form-control" type="text" name="ritmo" [ngModel]="gineco.ritmo"
+                required
+                #ritmo="ngModel">
+                <div *ngIf="(ritmo.touched || ritmo.dirty) && ritmo.errors">
+                    <div *ngIf="ritmo?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="fum" class="required">F.U.M</label>                    
+                <input class="form-control" type="date" name="fum" [ngModel]="gineco.fum | date:'yyyy-MM-dd'"
+                required
+                #fum="ngModel">
+                <div *ngIf="(fum.touched || fum.dirty) && fum.errors">
+                    <div *ngIf="fum?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="g" class="required">G</label>
+                <select class="form-control" name="g" [ngModel]="gineco.g"
+                required
+                #g="ngModel">
+                    <option></option>
+                    <option>Si</option>
+                    <option>No</option>
+                    
+                </select>
+                <div *ngIf="(g.touched || g.dirty) && g.errors">
+                    <div *ngIf="g?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="p" class="required">P</label>
+                <select class="form-control" name="p" [ngModel]="gineco.p"
+                required
+                #p="ngModel">
+                    <option></option>
+                    <option>Si</option>
+                    <option>No</option>
+                    
+                </select>
+                <div *ngIf="(p.touched || p.dirty) && p.errors">
+                    <div *ngIf="p?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="c" class="required">C</label>
+                <select class="form-control" name="c" [ngModel]="gineco.c"
+                required
+                #c="ngModel">
+                    <option></option>
+                    <option>Si</option>
+                    <option>No</option>
+                    
+                </select>
+                <div *ngIf="(c.touched || c.dirty) && c.errors">
+                    <div *ngIf="c?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="ivsa" class="required">I.V.S.A</label>
+                <select class="form-control" name="ivsa" [ngModel]="gineco.ivsa"
+                required
+                #ivsa="ngModel">
+                    <option></option>
+                    <option>Si</option>
+                    <option>No</option>
+                    
+                </select>
+                <div *ngIf="(ivsa.touched || ivsa.dirty) && ivsa.errors">
+                    <div *ngIf="ivsa?.errors?.required" class="alert alert-danger">
+                        Necesario
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-lg">
+                <label for="comment">Commentarios</label>
+                
+                <textarea class="form-control"  name="comment" cols="3" rows="3" [ngModel]="gineco.comment"></textarea>
+        
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" >Uso de Metodos anticonceptivos</label>
+            </div>
+            <div class="form-check form-check-inline">            
+                <input class="form-check-input" type="radio" name="anticonceptivo" value="Si" [ngModel]="gineco.anticonceptivo">
+                <label class="form-check-label" for="anticonceptivo">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="anticonceptivo" value="No" [ngModel]="gineco.anticonceptivo">
+                <label class="form-check-label" for="anticonceptivo">No</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" >Cuales?</label>
+            </div>
+            <div class="form-group col-lg">                
+                <textarea class="form-control"  name="cuales" cols="2" rows="2" [ngModel]="gineco.anticonceptivo"></textarea>
+        
+            </div>
+    
+
+
+        </div>   
+        
+        <br>
+        <button *ngIf="!newForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Añadir</button>
+        <button *ngIf="newForm.valid" class="btn btn-primary btn-sm btn-space">Añadir</button>
+        <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+        
+    </form>
+    <br>
+
+</div>
+
+<div *ngIf="!show">
+    <div class='col-lg scroll scrollbar-primary' *ngFor="let list of pat.gineco">
+ 
+        <form   #upForm="ngForm" (submit)="onUpdate(upForm)">
+            
+            <div class="form-row">
+                <div class="form-group col-sm-3">
+                    <label for="menarquia" class="required" class="required">Menarquia</label>                    
+                    <input class="form-control" type="text" name="menarquia" [ngModel]="list['_doc'].menarquia"
+                    required
+                    #menarquia="ngModel">
+                    <div *ngIf="(menarquia.touched || menarquia.dirty) && menarquia.errors">
+                        <div *ngIf="menarquia?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="ritmo" class="required" class="required">Ritmo</label>                    
+                    <input class="form-control" type="text" name="ritmo" [ngModel]="list['_doc'].ritmo"
+                    required
+                    #ritmo="ngModel">
+                    <div *ngIf="(ritmo.touched || ritmo.dirty) && ritmo.errors">
+                        <div *ngIf="ritmo?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <label for="fum" class="required" class="required">F.U.M</label>                    
+                    <input class="form-control" type="date" name="fum" [ngModel]=" list['_doc'].fum |date:'yyyy-MM-dd'" 
+                    required
+                    #fum="ngModel">
+                    <div *ngIf="(fum.touched || fum.dirty) && fum.errors">
+                        <div *ngIf="fum?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="g" class="required" class="required">G</label>
+                    <select class="form-control" name="g" [ngModel]="list['_doc'].g"
+                    required
+                    #g="ngModel">
+                        <option></option>
+                        <option>Si</option>
+                        <option>No</option>
+                        
+                    </select>
+                    <div *ngIf="(g.touched || g.dirty) && g.errors">
+                        <div *ngIf="g?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="p" class="required">P</label>
+                    <select class="form-control" name="p" [ngModel]="list['_doc'].p"
+                    required
+                    #p="ngModel">
+                        <option></option>
+                        <option>Si</option>
+                        <option>No</option>
+                        
+                    </select>
+                    <div *ngIf="(p.touched || p.dirty) && p.errors">
+                        <div *ngIf="p?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="c" class="required">C</label>
+                    <select class="form-control" name="c" [ngModel]="list['_doc'].c"
+                    required
+                    #c="ngModel">
+                        <option></option>
+                        <option>Si</option>
+                        <option>No</option>
+                        
+                    </select>
+                    <div *ngIf="(c.touched || c.dirty) && c.errors">
+                        <div *ngIf="c?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="ivsa" class="required">I.V.S.A</label>
+                    <select class="form-control" name="ivsa" [ngModel]="list['_doc'].ivsa"
+                    required
+                    #ivsa="ngModel">
+                        <option></option>
+                        <option>Si</option>
+                        <option>No</option>
+                        
+                    </select>
+                    <div *ngIf="(ivsa.touched || ivsa.dirty) && ivsa.errors">
+                        <div *ngIf="ivsa?.errors?.required" class="alert alert-danger">
+                            Necesario
+                        </div>
+                        
+                    </div>
+                </div>
+    
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg">
+                    <label for="reason">Commentarios</label>
+                    
+                    <textarea class="form-control"  name="comment" cols="3" rows="3" [ngModel]="list['_doc'].comment"></textarea>
+            
+                </div>
+    
+            </div>
+            <div class="form-row">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" >Uso de Metodos anticonceptivos</label>
+                </div>
+                <div class="form-check form-check-inline">            
+                    <input class="form-check-input" type="radio" name="anticonceptivo" value="Si" [ngModel]="list['_doc'].anticonceptivo">
+                    <label class="form-check-label" for="anticonceptivo">Si</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="anticonceptivo" value="No" [ngModel]="list['_doc'].anticonceptivo">
+                    <label class="form-check-label" for="anticonceptivo">No</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" >Cuales?</label>
+                </div>
+                <div class="form-group col-lg">                
+                    <textarea class="form-control"  name="cuales" cols="2" rows="2" [ngModel]="list['_doc'].anticonceptivo"></textarea>
+            
+                </div>
+        
+    
+    
+            </div> 
+            <input type="hidden" name="_id" [ngModel]="list['_doc'].sid" class="form-control">
+            <input type="hidden" name="_id2" [ngModel]="pat.sid" class="form-control">  
+            
+            <br>
+            <button *ngIf="!upForm.valid" class="btn btn-primary btn-sm btn-space" disabled>Salvar</button>
+            <button *ngIf="upForm.valid" class="btn btn-primary btn-sm btn-space">Salvar</button>
+            <button class="btn btn-danger btn-sm btn-space" (click)="refresh()">Cancelar</button>  
+            
+        </form>
+        <br>
+    
+    </div>
+
+
+</div>
+
+

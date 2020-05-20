@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-sm-3">
+        <h2>Documentos</h2>
+    </div>
+    <div class="col-sm-5">
+        <button *ngIf="!showlist" class="btn btn-outline-primary btn-sm" (click)="showList()">Lista</button>
+        <button *ngIf="showlist" class="btn btn-outline-danger btn-sm" (click)="hideList()">Ocultar Lista</button>
+    </div>
+
+</div>
+<div class="container-fluid"> 
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 scroll scrollbar-primary">
+            <div class="row card" *ngIf="!showlist">
+                <div class="col-sm-12">
+                    <h4>Subir Documentos</h4>
+                    <div id="fileSelector" *ngIf="uploader?.queue?.length < 1">
+                        <input type="file" name="fileUpload" id="fileUpload"
+                        ng2FileSelect [uploader]="uploader">
+                    </div>
+                    <div>
+                        <div class="row uploadList" *ngFor="let item of uploader.queue">
+                            <div class="col-sm-4">{{item.file.name}}</div>
+                            <div class="col-sm-4">
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" 
+                                    [ngStyle]="{'width':item.progress+'%'}"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                    <button type="button" class="btn btn-dark" (click)="item.upload()">Subir</button>
+                                    <button type="button" class="btn btn-danger" (click)="item.remove()">Cancelar</button>
+                            </div>
+                           
+                        </div>                        
+                    </div>
+                   
+                </div>                
+            </div>
+
+            <div class="row card" *ngIf="showlist">
+                <h4>Bajar Documentos</h4>
+                <table class="table table-light"> 
+                    <thead class="table-primary">
+                        <tr class="d-flex"><th class="col-sm-7">Documento</th><th class="col-sm-2">Actiones</th></tr>  
+                    </thead>
+                
+                    <tbody *ngFor="let list of pat.file; let i = index">
+                        
+                        <tr class="d-flex">
+                            <td class="col-sm-7"><button class="btn btn-outline-primary btn-sm btn-space" (click)="download(i)">{{list.originalname}}</button></td>
+                            <td class="col-sm-2"><button class="btn btn-outline-danger btn-sm btn-space" (click)="onClickDelete(list)">Eliminar</button></td>
+                            
+                        
+                        </tr> 
+                
+                    </tbody>
+                    
+                    
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
